@@ -7,7 +7,7 @@ import { Product } from '../product';
 import { ProductService } from '../product.service';
 
 import { Store, select } from '@ngrx/store';
-import { State, ProductState } from '../state/product.reducer';
+import { State, ProductState, getShowProductCode } from '../state/product.reducer';
 
 @Component({
   selector: 'pm-product-list',
@@ -40,10 +40,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     // TODO: unsubscribe
     this.store
-        .pipe(
-          select<State, 'products'>('products'),
-        )
-        .subscribe(products => this.displayCode = products.showProductCode);
+        .pipe(select(getShowProductCode))
+        .subscribe(showProductCode => this.displayCode = showProductCode);
   }
 
   ngOnDestroy(): void {
