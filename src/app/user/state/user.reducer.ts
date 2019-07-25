@@ -1,4 +1,5 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { UserActionTypes } from './user.actions';
 
 export interface UserState {
   maskUserName: boolean;
@@ -17,7 +18,7 @@ export const getMaskUserNameState = createSelector(
 
 export function reducer(state = defaultState, action) {
   switch (action.type) {
-    case 'TOGGLE_USERNAME_MASK':
+    case UserActionTypes.MaskUserName:
       return {
         ...state,
         maskUserName: action.payload

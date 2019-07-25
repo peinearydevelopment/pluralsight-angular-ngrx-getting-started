@@ -6,6 +6,8 @@ import { filter } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Store, select } from '@ngrx/store';
 import { getMaskUserNameState } from './state/user.reducer';
+import { State } from '../state/app.state';
+import { UserActionTypes, MaskUserName } from './state/user.actions';
 
 @Component({
   templateUrl: './login.component.html',
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private store: Store<any>) {
+              private store: Store<State>) {
   }
 
   ngOnInit(): void {
@@ -33,10 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   checkChanged(value: boolean): void {
-    this.store.dispatch({
-      type: 'TOGGLE_USERNAME_MASK',
-      payload: value
-    });
+    this.store.dispatch(new MaskUserName(value));
   }
 
   login(loginForm: NgForm): void {
